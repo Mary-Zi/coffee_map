@@ -2,59 +2,63 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="../coffee_map/css/style.css">
+
     <title>Cafe in Tallinn</title>
 </head>
 <body>
     <nav>
-        <h1>Tallinn Good Coffee Guide</h1>
-            <div>
-                <a href="https://www.instagram.com/spb.coffee.guide/"><img src="../end-using/img/1024px-Instagram_icon.png" alt="instagram" width="20
-                    %"></a>
+        <h1><a href="coffee_map.html">Tallinn Good Coffee Guide</a></h1>
+            <div class="social">
+                <a href="https://www.instagram.com/spb.coffee.guide/"><img src="../coffee_map/img/insta.png" alt="instagram"></a>
             </div>
     </nav>
-    <div>
+    <div class="intro">
         <p>This is a map where you can find coffee shops which make their drinks with coffee beans from independent roasters which support farmers and believe in sustainability and transparent supply chain. Also it's a social media for concious coffeelovers. Here you can share your reviews and meet soulmates.</p>
-            <div id="map">
-                <iframe width="100%" height="480" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=24.574327915906906%2C59.3921379641039%2C24.86271902918816%2C59.5083590047926&amp;layer=mapnik" style="border: 1px solid black"></iframe>
-            </div>
     </div>
-        <div id="cafes">
-            <div id="cafe_card">
-                <div id="cafe_img">
-                    <img src="../coffee_map/img/kokomo.png" alt="kokomo" width="40%">
-                </div>
-                <div>
-                    <a href="../end-using/cafe_page.html">
-                        <h2>
-                            Kokomo
-                        </h2>
-                    </a>
-                    <p>
-                        KOKOMO is the freshest micro roastery in Estonia, introducing different characters from various coffee origins by constantly sourcing fresh crops. Great coffee is not a secret shared only among the café folk. It should be a common knowledge.
-                    </p>
-                    <p id="adress">
-                        Marati, 5
-                    </p>
-                </div>
-            </div>
-            <div id="cafe_card">
-                <div id="cafe_img">
-                    <img src="../end-using/img/Papermill.jpeg" alt="papermill" width="40%">
-                </div>
-                <div>
-                    <a href="">
-                        <h2>
-                            Papermill
-                        </h2>
-                    </a>
-                    <p>
-                        Paper Mill Coffee roasts coffee in their cafe, currently they have 4 single origin coffees and an espresso blend in the selection. Their coffee menu includes espresso-based drinks, batch brew filter coffee and and also they offer healthy lunch.
-                    </p>
-                    <p id="adress">
-                        Masina, 20
-                    </p>
-                </div>
-            </div>
+        <div id="map">
+            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=24.574327915906906%2C59.3921379641039%2C24.86271902918816%2C59.5083590047926&amp;layer=mapnik"></iframe>
         </div>
+            <div id="cafes">
+                <div class = "cafes">
+                    <div id="cafe_card"> 
+                        <a href="../coffee_map/cafe_page.html">
+                        <div class="cafe_img">
+                            <img src="../coffee_map/img/kokomo.png" alt="kokomo">
+                        </div>
+                        <div>
+                                <h2>
+                                    Kokomo
+                                </h2>
+                            <p>
+                                KOKOMO is the freshest micro roastery in Estonia, introducing different characters from various coffee origins by constantly sourcing fresh crops. Great coffee is not a secret shared only among the café folk. It should be a common knowledge.
+                            </p>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p id="address">
+                                Marati, 5
+                            </p>
+                        </div>
+                        </a>
+                    </div>
+                    <div id="cafe_card">
+                        <div class="cafe_img">
+                            <img src="../coffee_map/img/Papermill.jpeg" alt="papermill">
+                        </div>
+                        <div>
+                            <a href="">
+                                <h2>
+                                    Papermill
+                                </h2>
+                            </a>
+                            <p>
+                                Paper Mill Coffee roasts coffee in their cafe, currently they have 4 single origin coffees and an espresso blend in the selection. Their coffee menu includes espresso-based drinks, batch brew filter coffee and and also they offer healthy lunch.
+                            </p>
+                            <p id="address">
+                                Masina, 20
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </body>
 </html>
