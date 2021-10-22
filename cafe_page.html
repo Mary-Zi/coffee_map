@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafe in Tallinn</title>
     <link rel="stylesheet" href="../coffee_map/css/style.css">
+    <script src="https://kit.fontawesome.com/9055f6e4aa.js" crossorigin="anonymous"></script>
+    <script src="../coffee_map/script.js"> </script> 
 </head>
 <body>
     <nav>
@@ -26,9 +28,7 @@
             <h2 class="cafe_name">
                 KOKOMO
             </h2>
-            <div id="like">
-                <img src="../coffee_map/img/like.png" alt="like">
-            </div>
+            <i onclick = "Toggle()" id="like" class="far fa-heart"></i>
         </div>
         <div class="desciption">
             <p>
@@ -47,5 +47,29 @@
           </ul> 
        </div>         
     </div>
+    <script>
+        var like = document.getElementById('like');
+                function Toggle () {
+                    if (like.classList.contains ("far")) {
+                        like.classList.remove("far");
+                        like.classList.add("fas");
+                    } else {
+                        like.classList.remove("fas");
+                        like.classList.add("far");
+                    }
+                }
+                var map = new ol.Map({
+            target: 'map',
+            layers: [
+              new ol.layer.Tile({
+                source: new ol.source.OSM()
+              })
+            ],
+            view: new ol.View({
+              center: ol.proj.fromLonLat([37.41, 8.82]),
+              zoom: 4
+            })
+          });
+    </script>
 </body>
 </html>

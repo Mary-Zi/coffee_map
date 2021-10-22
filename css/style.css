@@ -92,7 +92,12 @@ body {
 .cafe_name {
     margin: 15px 0;
 }
-#like img {
-    width: 24px;
-    margin-left: 10px;
+h2 {
+    display: inline-block;
+}
+#like {
+    font-size: 20px;
+}
+#like:hover {
+    color: red;
 }

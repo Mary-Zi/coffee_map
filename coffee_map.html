@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../coffee_map/css/style.css">
-
+    <script src="https://kit.fontawesome.com/9055f6e4aa.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"></script>
     <title>Cafe in Tallinn</title>
 </head>
 <body>
@@ -16,20 +17,25 @@
     <div class="intro">
         <p>This is a map where you can find coffee shops which make their drinks with coffee beans from independent roasters which support farmers and believe in sustainability and transparent supply chain. Also it's a social media for concious coffeelovers. Here you can share your reviews and meet soulmates.</p>
     </div>
+    <!---
         <div id="map">
             <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=24.574327915906906%2C59.3921379641039%2C24.86271902918816%2C59.5083590047926&amp;layer=mapnik"></iframe>
         </div>
+    -->
+        <div id="map" class="map"></div>
             <div id="cafes">
                 <div class = "cafes">
                     <div id="cafe_card"> 
-                        <a href="../coffee_map/cafe_page.html">
                         <div class="cafe_img">
                             <img src="../coffee_map/img/kokomo.png" alt="kokomo">
                         </div>
                         <div>
+                            <a href="../coffee_map/cafe_page.html">
                                 <h2>
                                     Kokomo
                                 </h2>
+                            </a>
+                            <i onclick = "Toggle()" id="like" class="far fa-heart"></i>
                             <p>
                                 KOKOMO is the freshest micro roastery in Estonia, introducing different characters from various coffee origins by constantly sourcing fresh crops. Great coffee is not a secret shared only among the café folk. It should be a common knowledge.
                             </p>
@@ -38,7 +44,6 @@
                                 Marati, 5
                             </p>
                         </div>
-                        </a>
                     </div>
                     <div id="cafe_card">
                         <div class="cafe_img">
@@ -50,6 +55,7 @@
                                     Papermill
                                 </h2>
                             </a>
+                            <i onclick = "Toggle()" id="like" class="far fa-heart"></i>
                             <p>
                                 Paper Mill Coffee roasts coffee in their cafe, currently they have 4 single origin coffees and an espresso blend in the selection. Their coffee menu includes espresso-based drinks, batch brew filter coffee and and also they offer healthy lunch.
                             </p>
@@ -60,5 +66,31 @@
                     </div>
                 </div>
             </div>
+            <script>
+                var like = document.getElementById('like');
+                        function Toggle () {
+                            if (like.classList.contains ("far")) {
+                                like.classList.remove("far");
+                                like.classList.add("fas");
+                            } else {
+                                like.classList.remove("fas");
+                                like.classList.add("far");
+                            }
+                        }
+                        
+                var map = new ol.Map({
+                target: 'map',
+                layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+                ],
+                view: new ol.View({
+                center: ol.proj.fromLonLat([24.7047, 59.4470]),
+                zoom: 13
+                })
+            });
+            
+            </script>
 </body>
 </html>
