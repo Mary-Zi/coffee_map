@@ -35,16 +35,17 @@ nav .social {
 body {
     margin: 0 25px;
 }
-.intro {
+.intro p {
     margin-top: 50px;
+    width: 80%;
 }
 #map {
     height: calc(100vh - 50px);
 }
-#map iframe {
+#map #mapdiv {
     width: 100%;
     overflow: hidden;
-    height: 100%;
+    height: calc(100vh - 50px);
 }
 #cafes {
     width: 480px;
@@ -59,8 +60,9 @@ body {
     overflow: scroll;
     position: relative;
     justify-content: space-between;
+    z-index: 1000;
 }
-#cafe_card {
+.cafe_card {
     position: relative;
     background: #ffffff;
     border: none;

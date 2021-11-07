@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../coffee_map/css/style.css">
     <script src="https://kit.fontawesome.com/9055f6e4aa.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"></script>
     <title>Cafe in Tallinn</title>
 </head>
 <body>
@@ -17,15 +16,12 @@
     <div class="intro">
         <p>This is a map where you can find coffee shops which make their drinks with coffee beans from independent roasters which support farmers and believe in sustainability and transparent supply chain. Also it's a social media for concious coffeelovers. Here you can share your reviews and meet soulmates.</p>
     </div>
-    <!---
-        <div id="map">
-            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=24.574327915906906%2C59.3921379641039%2C24.86271902918816%2C59.5083590047926&amp;layer=mapnik"></iframe>
-        </div>
-    -->
-        <div id="map" class="map"></div>
+    <div id="map">
+        <div id="mapdiv"></div>
+    </div>
             <div id="cafes">
                 <div class = "cafes">
-                    <div id="cafe_card"> 
+                    <div class="cafe_card"> 
                         <div class="cafe_img">
                             <img src="../coffee_map/img/kokomo.png" alt="kokomo">
                         </div>
@@ -45,7 +41,7 @@
                             </p>
                         </div>
                     </div>
-                    <div id="cafe_card">
+                    <div class="cafe_card">
                         <div class="cafe_img">
                             <img src="../coffee_map/img/Papermill.jpeg" alt="papermill">
                         </div>
@@ -64,33 +60,98 @@
                             </p>
                         </div>
                     </div>
+                    <div class="cafe_card">
+                        <div class="cafe_img">
+                            <img src="../coffee_map/img/fika.jpeg" alt="papermill">
+                        </div>
+                        <div>
+                            <a href="">
+                                <h2>
+                                    Fika
+                                </h2>
+                            </a>
+                            <i onclick = "Toggle()" id="like" class="far fa-heart"></i>
+                            <p>
+                                Fika – Leib ja Kohv is a beautiful cafe situated in the heart of Telliskivi. They serve Bekker bread and pastries together with artisanal coffee. You can choose different kinds of roasts and buy something for home as well like coffee filters, coffee makers. Great place for a souvenir for the coffee lovers.
+                            </p>
+                            <p id="address">
+                                Telliskivi 60a
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
             <script>
-                var like = document.getElementById('like');
-                        function Toggle () {
-                            if (like.classList.contains ("far")) {
-                                like.classList.remove("far");
-                                like.classList.add("fas");
-                            } else {
-                                like.classList.remove("fas");
-                                like.classList.add("far");
-                            }
-                        }
-                        
-                var map = new ol.Map({
-                target: 'map',
-                layers: [
-                new ol.layer.Tile({
-                    source: new ol.source.OSM()
+              // Adapted from: harrywood.co.uk
+              epsg4326 = new OpenLayers.Projection("EPSG:4326")
+          
+              map = new OpenLayers.Map({
+                div: "mapdiv",
+                displayProjection: epsg4326   // With this setting, lat and lon are displayed correctly in MousePosition and permanent anchor
+              });
+          
+              //   map = new OpenLayers.Map("mapdiv");
+              map.addLayer(new OpenLayers.Layer.OSM());
+              map.addLayer(new OpenLayers.Layer.OSM("Wikimedia",
+                ["https://maps.wikimedia.org/osm-intl/${z}/${x}/${y}.png"],
+                {
+                  attribution: "&copy; <a href='http://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='http://www.openstreetmap.org/copyright' title='ODbL'>open license</a>. <a href='https://www.mediawiki.org/wiki/Maps'>Wikimedia's new style (beta)</a>",
+                  "tileOptions": { "crossOriginKeyword": null }
                 })
-                ],
-                view: new ol.View({
-                center: ol.proj.fromLonLat([24.7047, 59.4470]),
-                zoom: 13
-                })
-            });
-            
+              );
+              // See https://wiki.openstreetmap.org/wiki/Tile_servers for other OSM-based layers
+          
+              map.addControls([
+                new OpenLayers.Control.MousePosition(),
+                new OpenLayers.Control.ScaleLine(),
+                new OpenLayers.Control.LayerSwitcher(),
+                new OpenLayers.Control.Permalink({ anchor: true })
+              ]);
+          
+              projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
+              var lonLat = new OpenLayers.LonLat(24.70343, 59.42638).transform(epsg4326, projectTo);
+              var zoom = 12;
+              if (!map.getCenter()) {
+                map.setCenter(lonLat, zoom);
+              }
+          
+              // Put your point-definitions here
+              var markers = [
+                [24.6749959, 59.4560415, 'Cafe1'],
+                [24.7777746, 59.4261661, 'Cafe2']
+              ];
+          
+              var colorList = ["red"];
+              var layerName = [markers[0][2]];
+              var styleArray = [new OpenLayers.StyleMap({ pointRadius: 6, fillColor: colorList[0], fillOpacity: 0.5 })];
+              var vectorLayer = [new OpenLayers.Layer.Vector(layerName[0], { styleMap: styleArray[0] })];		// First element defines first Layer
+          
+              var j = 0;
+              for (var i = 1; i < markers.length; i++) {
+                if (!layerName.includes(markers[i][2])) {
+                  j++;
+                  layerName.push(markers[i][2]);															// If new layer name found it is created
+                  styleArray.push(new OpenLayers.StyleMap({ pointRadius: 6, fillColor: colorList[j % colorList.length], fillOpacity: 0.5 }));
+                  vectorLayer.push(new OpenLayers.Layer.Vector(layerName[j], { styleMap: styleArray[j] }));
+                }
+              }
+          
+              //Loop through the markers array
+              for (var i = 0; i < markers.length; i++) {
+                var lon = markers[i][0];
+                var lat = markers[i][1];
+                var feature = new OpenLayers.Feature.Vector(
+                  new OpenLayers.Geometry.Point(lon, lat).transform(epsg4326, projectTo),
+                  { description: "marker number " + i }
+                  // see http://dev.openlayers.org/docs/files/OpenLayers/Feature/Vector-js.html#OpenLayers.Feature.Vector.Constants for more options
+                );
+                vectorLayer[layerName.indexOf(markers[i][2])].addFeatures(feature);
+              }
+          
+              for (var i = 0; i < layerName.length; i++) {
+                map.addLayer(vectorLayer[i]);
+              }
             </script>
 </body>
 </html>
