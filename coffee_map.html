@@ -4,15 +4,39 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../coffee_map/css/style.css">
     <script src="https://kit.fontawesome.com/9055f6e4aa.js" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/handlebars/4.7.7/handlebars.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700;900&display=swap" rel="stylesheet">
+
     <title>Cafe in Tallinn</title>
 </head>
 <body>
     <nav>
-        <h1><a href="coffee_map.html">Tallinn Good Coffee Guide</a></h1>
-            <div class="social">
+        <h1><a href="coffee_map.html">Tallinn Good Coffee Map</a></h1>
+            
+        <div class="social">
                 <a href="https://www.instagram.com/spb.coffee.guide/"><img src="../coffee_map/img/insta.png" alt="instagram"></a>
+            <div class="open-button" onclick="openForm()"></div>
+            <button class="open-button" onclick="openForm()">Login</button>
             </div>
     </nav>
+    <div class="form-login" id="myForm">
+        <form class="form-container">
+          <h2>Login</h2>
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+      
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
     <div class="intro">
         <p>This is a map where you can find coffee shops which make their drinks with coffee beans from independent roasters which support farmers and believe in sustainability and transparent supply chain. Also it's a social media for concious coffeelovers. Here you can share your reviews and meet soulmates.</p>
     </div>
@@ -81,6 +105,15 @@
                     </div>
                 </div>
             </div>
+            <script>
+                function openForm() {
+                  document.getElementById("myForm").style.display = "block";
+                }
+                
+                function closeForm() {
+                  document.getElementById("myForm").style.display = "none";
+                }
+                </script>
             <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
             <script>
               // Adapted from: harrywood.co.uk
@@ -118,13 +151,14 @@
           
               // Put your point-definitions here
               var markers = [
-                [24.6749959, 59.4560415, 'Cafe1'],
-                [24.7777746, 59.4261661, 'Cafe2']
+                [24.6749959, 59.4560415, 'Kokomo'],
+                [24.7777746, 59.4261661, 'Papermill'],
+                [24,7286354, 59,4381196, 'Fika']
               ];
           
               var colorList = ["red"];
               var layerName = [markers[0][2]];
-              var styleArray = [new OpenLayers.StyleMap({ pointRadius: 6, fillColor: colorList[0], fillOpacity: 0.5 })];
+              var styleArray = [new OpenLayers.StyleMap({ pointRadius: 10, fillColor: colorList[0]})];
               var vectorLayer = [new OpenLayers.Layer.Vector(layerName[0], { styleMap: styleArray[0] })];		// First element defines first Layer
           
               var j = 0;
@@ -132,7 +166,7 @@
                 if (!layerName.includes(markers[i][2])) {
                   j++;
                   layerName.push(markers[i][2]);															// If new layer name found it is created
-                  styleArray.push(new OpenLayers.StyleMap({ pointRadius: 6, fillColor: colorList[j % colorList.length], fillOpacity: 0.5 }));
+                  styleArray.push(new OpenLayers.StyleMap({ pointRadius: 10, fillColor: colorList[j % colorList.length]}));
                   vectorLayer.push(new OpenLayers.Layer.Vector(layerName[j], { styleMap: styleArray[j] }));
                 }
               }

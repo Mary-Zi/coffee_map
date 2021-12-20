@@ -1,3 +1,15 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: brown;
+}
+p {
+    font-family: 'Overlock', cursive;
+}
 a:visited {color: #696969;}
 a {
     text-decoration: none;
@@ -21,16 +33,16 @@ nav>* {
 }
 nav .social {
     display: flex;
-    align-items: center;
-    margin-right: 25px;
+    align-items: right;
 }
 .social {
     display: flex;
-    align-items: center;
+    align-items: right;
 }
 .social img {
     width: 30px;
     height: 30px;
+    margin-right: 25px;
 }
 body {
     margin: 0 25px;
@@ -102,4 +114,58 @@ h2 {
 }
 #like:hover {
     color: red;
+}
+{box-sizing: border-box;}
+
+.open-button {
+  border: none;
+  cursor: pointer;
+  background-color: white;
+}
+.form-login {
+display: none;
+position: fixed;
+  top: 50px;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 10000;
+}
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+.form-container input[type=text], .form-container input[type=password] {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+.form-login h2 {
+    display: block;
 }
